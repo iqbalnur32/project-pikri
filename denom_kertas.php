@@ -74,60 +74,261 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Dashboard <?php echo ucfirst($_SESSION['level']);?></h1>
-      <div class="row">
-        <div class="col-lg-12">
-            <button class="btn btn-sm btn-primary pull-right" data-toggle="modal" data-target="#exampleModal" style="font-weight: bold;">Tambah</button>
-        </div> 
-      </div>
-      <br>
-          <div>
-            <table class="table table-bordered table-striped dataTable">
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Denom</th>
-                  <th>Rp1</th>
-                  <th>Rp2</th>
-                  <th>Rp3</th>
-                  <th>Rp4</th>
-                  <th>Rp5</th>
-                  <th>Rp6</th>
-                  <th>Inpak</th>
-                  <th style="text-align: center;">Action</th>
-                </tr>
-              </thead>
-              <?php 
-                $results = $mysqli->query('SELECT * FROM denom_kertas');
-                 if ($results->num_rows > 0) {
-                  $no = 1;
-                  while ($row = $results->fetch_assoc()) {
-              ?>
-              <tbody>
-                <tr>
-                  <td><?= $no++ ?></td>
-                  <td><?=$row['denom_kertas']?></td>
-                  <td><?=$row['rp1']?></td>
-                  <td><?=$row['rp2']?></td>
-                  <td><?=$row['rp3']?></td>
-                  <td><?=$row['rp4']?></td>
-                  <td><?=$row['rp5']?></td>
-                  <td><?=$row['rp6']?></td>
-                  <td><?=$row['inpak']?></td>
-                  <td class="d-flex">
-                    <a class="btn btn-sm btn-success">Edit</a>
-                    <form action="denom_kertas_process/process_delete_kertas.php" method="GET">
-                      <input type="hidden" name="id_denom_kertas" value="<?= $row['id_denom_kertas'] ?>">
-                      <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                    </form>
-                  </td>
-                </tr>
-              </tbody>
-              <?php 
-                }
-              }
-              ?>
-            </table>
+          <div class="row">
+            <div class="col-lg-12">
+                <button class="btn btn-sm btn-primary pull-right" data-toggle="modal" data-target="#exampleModal" style="font-weight: bold;">Tambah</button>
+            </div> 
           </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div id="exTab1" class="container"> 
+                  <ul  class="nav nav-pills">
+                    <li class="active">
+                      <a href="#1a" data-toggle="tab">Denom Kertas</a>
+                    </li>
+                    <li>
+                      <a href="#2a" data-toggle="tab">Denom Koin</a>
+                    </li>
+                  </ul>
+                  <div class="tab-content clearfix">
+                      <div class="tab-pane active" id="1a">
+                        <table class="table table-bordered table-striped dataTable">
+                          <thead>
+                            <tr role="row">
+                              <th>NO</th>
+                              <th>Denom Kertas</th>
+                              <th>RP1</th>
+                              <th>RP2</th>
+                              <th>RP3</th>
+                              <th>RP4</th>
+                              <th>RP5</th>
+                              <th>RP6</th>
+                              <th>Inpak</th>
+                              <th>Total</th>
+                              <th>Aksi</th>
+                            </tr>
+                          </thead>
+                          <tfoot>
+                            <tr role="row">
+                              <th></th>
+                              <th>Jumlah</th>
+                              <th>
+                                <?php 
+                                  $jumlah_per_rp1 = $mysqli->query("SELECT SUM(denom_kertas * rp1) AS JumlahRp1 FROM denom_kertas");
+                                  $resultKertas1 = $jumlah_per_rp1->fetch_assoc();
+                                  print_r($resultKertas1['JumlahRp1']);
+                                ?>
+                              </th>
+                              <th>
+                                <?php 
+                                  $jumlah_per_rp2 = $mysqli->query("SELECT SUM(denom_kertas * rp2) AS JumlahRp2 FROM denom_kertas");
+                                  $resultKertas2 = $jumlah_per_rp2->fetch_assoc();
+                                  print_r($resultKertas2['JumlahRp2']);
+                                ?>
+                              </th>
+                              <th>
+                                <?php 
+                                  $jumlah_per_rp3 = $mysqli->query("SELECT SUM(denom_kertas * rp3) AS JumlahRp3 FROM denom_kertas");
+                                  $resultKertas3 = $jumlah_per_rp3->fetch_assoc();
+                                  print_r($resultKertas3['JumlahRp3']);
+                                ?>
+                              </th>
+                              <th>
+                                <?php 
+                                  $jumlah_per_rp4 = $mysqli->query("SELECT SUM(denom_kertas * rp4) AS JumlahRp4 FROM denom_kertas");
+                                  $resultKertas4 = $jumlah_per_rp4->fetch_assoc();
+                                  print_r($resultKertas4['JumlahRp4']);
+                                ?>
+                              </th>
+                              <th>
+                                <?php 
+                                  $jumlah_per_rp5 = $mysqli->query("SELECT SUM(denom_kertas * rp5) AS JumlahRp5 FROM denom_kertas");
+                                  $resultKertas5 = $jumlah_per_rp5->fetch_assoc();
+                                  print_r($resultKertas5['JumlahRp5']);
+                                ?>
+                              </th>
+                              <th>
+                                <?php 
+                                  $jumlah_per_rp6 = $mysqli->query("SELECT SUM(denom_kertas * rp6) AS JumlahRp6 FROM denom_kertas");
+                                  $resultKertas6 = $jumlah_per_rp6->fetch_assoc();
+                                  print_r($resultKertas6['JumlahRp6']);
+                                ?>
+                              </th>
+                              <th>
+                                <?php 
+                                  $inpak = $mysqli->query("SELECT SUM(denom_kertas * inpak) AS Inpak FROM denom_kertas");
+                                  $resultInpakKertas = $inpak->fetch_assoc();
+                                  print_r($resultInpakKertas['Inpak']);
+                                ?>
+                              </th>
+                              <th>
+                                <?php 
+                                  $total_denom_kertas = $mysqli->query("SELECT SUM(denom_kertas * rp1)+SUM(denom_kertas * rp2)+SUM(denom_kertas * rp3)+SUM(denom_kertas * rp4)+SUM(denom_kertas * rp5)+SUM(denom_kertas * rp6) AS Total FROM denom_kertas");
+                                  $result_kertas = $total_denom_kertas->fetch_assoc();
+                                  print_r($result_kertas['Total']);
+                                ?>
+                              </th>
+                            </tr>
+                          </tfoot>
+                          <tbody>
+                            <?php 
+                              $results = $mysqli->query("SELECT * FROM denom_kertas");
+                              if ($results->num_rows > 0) {
+                                $no = 1;
+                                while ($row = $results->fetch_assoc()) {
+                            ?>
+                            <tr>
+                              <td><?php echo $no++; ?></td>
+                              <td><?= $row['denom_kertas'] ?></td>
+                              <td><?= $row['rp1'] ?></td>
+                              <td><?= $row['rp2'] ?></td>
+                              <td><?= $row['rp3'] ?></td>
+                              <td><?= $row['rp4'] ?></td>
+                              <td><?= $row['rp5'] ?></td> 
+                              <td><?= $row['rp6'] ?></td>
+                              <td><?= $row['inpak'] ?></td>
+                              <td>
+                                <?php
+                                    $total_satu_baris = $mysqli->query("SELECT SUM(rp1)+SUM(rp2)+SUM(rp3)+SUM(rp4)+SUM(rp5)+SUM(rp6) as Total FROM denom_kertas WHERE id_denom_kertas= '".$row['id_denom_kertas']."'");
+                                    $data_total_satu_baris = $total_satu_baris->fetch_assoc();
+                                    foreach ($data_total_satu_baris as $key => $value) {
+                                      echo $value; 
+                                    }
+                                 ?>
+                              </td>
+                              <td>
+                                <!-- <form action="denom_kertas_process/process_delete_kertas.php" method="GET">
+                                  <input class="form-control" name="id_denom_kertas" type="hidden" value="<?= $row['id_denom_kertas']?>"> 
+                                  <button class="btn btn-sm btn-danger">Delete</button>
+                                </form> -->
+                                <a class="btn btn-sm btn-danger" href="denom_kertas_process/process_delete_kertas.php?id_denom_kertas=<?= $row['id_denom_kertas']?>">Delete</a>
+                                <a class="btn btn-sm btn-warning" href="edit_denom_kertas.php?id_denom_kertas=<?= $row['id_denom_kertas']?>">Edit</a>
+                              </td>
+                            </tr>
+                            <?php 
+                              }
+                            }
+                            ?>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="tab-pane" id="2a">
+                        <table class="table table-bordered table-striped dataTable">
+                          <thead>
+                            <tr role="row">
+                              <th>NO</th>
+                              <th>Denom Koin</th>
+                              <th>RP1</th>
+                              <th>RP2</th>
+                              <th>RP3</th>
+                              <th>RP4</th>
+                              <th>RP5</th>
+                              <th>RP6</th>
+                              <th>Inpak</th>
+                              <th>Total</th>
+                            </tr>
+                          </thead>
+                          <tfoot>
+                            <tr>
+                              <th></th>
+                              <th>Jumlah</th>
+                              <th>
+                                <?php 
+                                  $denom_koin_1 = $mysqli->query("SELECT SUM(denom_koin * rp1) AS JumlahRp1 FROM denom_koin");
+                                  $resultkoin1 = $denom_koin_1->fetch_assoc();
+                                  print_r($resultkoin1['JumlahRp1']);
+                                ?>
+                              </th>
+                              <th>
+                                <?php 
+                                  $denom_koin_2 = $mysqli->query("SELECT SUM(denom_koin * rp2) AS JumlahRp2 FROM denom_koin");
+                                  $resultKoin2 = $denom_koin_2->fetch_assoc();
+                                  print_r($resultKoin2['JumlahRp2']);
+                                ?>
+                              </th>
+                              <th>
+                                <?php 
+                                  $denom_koin_3 = $mysqli->query("SELECT SUM(denom_koin * rp3) AS JumlahRp3 FROM denom_koin");
+                                  $resultKoin3 = $denom_koin_3->fetch_assoc();
+                                  print_r($resultKoin3['JumlahRp3']);
+                                ?>
+                              </th>
+                              <th>
+                                <?php 
+                                  $denom_koin_4 = $mysqli->query("SELECT SUM(denom_koin * rp4) AS JumlahRp4 FROM denom_koin");
+                                  $resultKoin4 = $denom_koin_4->fetch_assoc();
+                                  print_r($resultKoin4['JumlahRp4']);
+                                ?>
+                              </th>
+                              <th>
+                                <?php 
+                                  $denom_koin_5 = $mysqli->query("SELECT SUM(denom_koin * rp5) AS JumlahRp5 FROM denom_koin");
+                                  $resultKoin5 = $denom_koin_5->fetch_assoc();
+                                  print_r($resultKoin5['JumlahRp5']);
+                                ?>
+                              </th>
+                              <th>
+                                <?php 
+                                  $denom_koin_6 = $mysqli->query("SELECT SUM(denom_koin * rp6) AS JumlahRp6 FROM denom_koin");
+                                  $resultKoin6 = $denom_koin_6->fetch_assoc();
+                                  print_r($resultKoin6['JumlahRp6']);
+                                ?>
+                              </th>
+                              <th>
+                                <?php 
+                                  $inpak = $mysqli->query("SELECT SUM(denom_koin * inpak) AS Inpak FROM denom_koin");
+                                  $resultInpakKoin = $inpak->fetch_assoc();
+                                  print_r($resultInpakKoin['Inpak']);
+                                ?>
+                              </th>
+                              <th>
+                                 <?php 
+                                  $total_denom_koin = $mysqli->query("SELECT SUM(denom_koin * rp1)+SUM(denom_koin * rp2)+SUM(denom_koin * rp3)+SUM(denom_koin * rp4)+SUM(denom_koin * rp5)+SUM(denom_koin * rp6) AS Total FROM denom_koin");
+                                  $result_koin = $total_denom_koin->fetch_assoc();
+                                  print_r($result_koin['Total']);
+                                ?>
+                              </th>
+                            </tr>
+                          </tfoot>
+                          <tbody>
+                            <?php 
+                              $results = $mysqli->query("SELECT * FROM denom_koin");
+                              if ($results->num_rows > 0) {
+                                $no = 1;
+                                while ($row = $results->fetch_assoc()) {
+                            ?>
+                            <tr>
+                              <td><?php echo $no++; ?></td>
+                              <td><?= $row['denom_koin'] ?></td>
+                              <td><?= $row['rp1'] ?></td>
+                              <td><?= $row['rp2'] ?></td>
+                              <td><?= $row['rp3'] ?></td>
+                              <td><?= $row['rp4'] ?></td>
+                              <td><?= $row['rp5'] ?></td>
+                              <td><?= $row['rp6'] ?></td>
+                              <td><?= $row['inpak'] ?></td>
+                              <td>
+                                <?php
+                                    $total_satu_baris = $mysqli->query("SELECT SUM(rp1)+SUM(rp2)+SUM(rp3)+SUM(rp4)+SUM(rp5)+SUM(rp6) as Total FROM denom_koin WHERE id_denom_koin= '".$row['id_denom_koin']."'");
+                                    $data_total_satu_baris = $total_satu_baris->fetch_assoc();
+                                    foreach ($data_total_satu_baris as $key => $value) {
+                                      echo $value; 
+                                    }
+                                 ?>
+                              </td>
+                            </tr>
+                            <?php 
+                              }
+                            }
+                            ?>
+                          </tbody>
+                        </table>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <br>
          </div>
         </div>
       </div>
@@ -222,6 +423,27 @@
           "bAutoWidth": false
         });
       });
+    </script>
+
+    <script type="text/javascript">
+      // $('#myTab').on('click', function(e) {
+      //     e.preventDefault();
+      //     if (isValid()) {
+      //       // alert('bener valid')
+      //       $(this).tab('show');
+      //     }
+      //   });
+
+      //   function isValid() {
+      //     const text = $("#homeText").val();
+      //     console.log(text)
+      //     if (text.length === 0) {
+      //       // alert('false')
+      //       return false;
+      //     }
+      //     // alert('true')
+      //     return true;
+      //   }
     </script>
 
     <!-- <script type="text/javascript">

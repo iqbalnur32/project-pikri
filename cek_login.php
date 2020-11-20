@@ -21,7 +21,7 @@
 			$_SESSION['login'] = 'login';
 		}
 		if($_SESSION['level']=='admin'){
-			header('Location: dashboard_a.php');
+			header('Location: denom_kertas.php');
 		}
 		else{
 			header('Location: dashboard_u.php');
