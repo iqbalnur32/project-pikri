@@ -17,8 +17,9 @@
 		exit();
 	}
 	else{
-		// echo base_url('denom_kertas.php');
-		print_r('berhasil');
-		// echo "<script>window.location = 'denom_kertas.php'</script>";
+		echo "<script>
+       alert('Data berhasil di tambahkan');
+       window.location.href='../denom_kertas.php';
+       </script>";
 	}
 ?>

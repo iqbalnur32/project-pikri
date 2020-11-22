@@ -66,8 +66,7 @@
           <ul class="nav nav-sidebar">
           <?php if($_SESSION['level']=='admin'){?>
              
-            <li class="active"><a href="">Denom Kertas</a></li>
-            <li><a href="">Denom Koin</a></li>
+            <li class="active"><a href="">Master Data Denom</a></li>
             <li><a href="">Keuangan</a></li>
             <?php } ?>
           </ul>
