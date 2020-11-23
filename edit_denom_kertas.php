@@ -4,8 +4,9 @@
 	include 'koneksi.php';
 
 	if ($_POST) {
-		
-		$result = $mysqli->query("UPDATE denom_kertas SET id_denom_kertas='".$_POST['id_denom_kertas']."', denom_kertas='".$_POST['denom_kertas']."'WHERE id_denom_kertas=".$_POST['id_denom_kertas']);
+
+		date_default_timezone_set("Asia/Bangkok");
+		$result = $mysqli->query("UPDATE denom_kertas SET id_denom_kertas='".$_POST['id_denom_kertas']."', rp1='".$_POST['rp1']."', rp2='".$_POST['rp2']."', rp3='".$_POST['rp3']."', rp4='".$_POST['rp4']."', rp5='".$_POST['rp5']."', rp6='".$_POST['rp6']."', updated_at='".date('Y-m-d H:s:i')."' WHERE id_denom_kertas=".$_POST['id_denom_kertas']);
 
 		if(!$result){
 			echo $mysqli->connect_errno." - ".$mysqli->connect_error;
@@ -95,8 +96,7 @@
           <ul class="nav nav-sidebar">
           <?php if($_SESSION['level']=='admin'){?>
              
-            <li class="active"><a href="">Denom Kertas</a></li>
-            <li><a href="">Denom Koin</a></li>
+            <li class="active"><a href="">Master Data Denom</a></li>
             <li><a href="">Keuangan</a></li>
             <?php } ?>
           </ul>
@@ -113,9 +113,29 @@
 	            <div class="col-lg-12">
 	              	<div class="form-group">
 	              		<input class="form-control" type="hidden" name="id_denom_kertas" value="<?= $data->id_denom_kertas ?>">
-	              		<label>Denom Kertas</label>
-	              		<input class="form-control" type="number" name="denom_kertas" value="<?= $data->denom_kertas ?>">
+	              		<label>Rp 1</label>
+	              		<input class="form-control" type="number" name="rp1" value="<?= $data->rp1 ?>">
 	              	</div>
+                  <div class="form-group">
+                    <label>Rp 2</label>
+                    <input class="form-control" type="number" name="rp2" value="<?= $data->rp2 ?>">
+                  </div>
+                  <div class="form-group">
+                    <label>Rp 3</label>
+                    <input class="form-control" type="number" name="rp3" value="<?= $data->rp3 ?>">
+                  </div>
+                  <div class="form-group">
+                    <label>Rp 4</label>
+                    <input class="form-control" type="number" name="rp4" value="<?= $data->rp4 ?>">
+                  </div>
+                  <div class="form-group">
+                    <label>Rp 5</label>
+                    <input class="form-control" type="number" name="rp5" value="<?= $data->rp5 ?>">
+                  </div>
+                  <div class="form-group">
+                    <label>Rp 6</label>
+                    <input class="form-control" type="number" name="rp6" value="<?= $data->rp6 ?>">
+                  </div>
 	              	<div class="float-right">
 	              		<button class="btn btn-sm btn-success">Update</button>
 	              	</div>

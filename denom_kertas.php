@@ -225,6 +225,7 @@
                               <th>RP6</th>
                               <th>Inpak</th>
                               <th>Total</th>
+                              <th>Aksi</th>
                             </tr>
                           </thead>
                           <tfoot>
@@ -314,6 +315,10 @@
                                       echo $value; 
                                     }
                                  ?>
+                              </td>
+                              <td>
+                                <a class="btn btn-sm btn-danger" href="denom_kertas_process/process_delete_kertas.php?id_denom_kertas=<?= $row['id_denom_kertas']?>">Delete</a>
+                                <a class="btn btn-sm btn-warning" href="edit_denom_koin.php?id_denom_koin=<?= $row['id_denom_koin']?>">Edit</a>
                               </td>
                             </tr>
                             <?php 
